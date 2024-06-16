@@ -21,4 +21,8 @@ public class RealEstateBO {
 	public List<RealEstate> getRealEstateListByRentPrice(Integer rentPrice) {
 		return realEstateMapper.selectRealEstateListByRentPrice(rentPrice);
 	}
+	
+	public List<RealEstate> getRealEstateListByAreaAndPrice(int area, int price) {
+		return realEstateMapper.selectRealEstateListByAreaAndPrice(area, price);
+	}
 }
