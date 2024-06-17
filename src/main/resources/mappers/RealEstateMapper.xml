@@ -34,10 +34,12 @@
 		FROM
 			`real_estate`
 		WHERE
-			`rentPrice` &lt; #{rentPrice}
+			<![CDATA[
+			`rentPrice` < #{rentPrice}
+			]]>
 	</select>
 		
-	<select id="selectRealEstateListByAreaAndPrice" parameterType="int" resultType="com.quiz.lesson03.domain.RealEstate">
+	<select id="selectRealEstateListByAreaAndPrice" parameterType="map" resultType="com.quiz.lesson03.domain.RealEstate">
 		SELECT
 			`id`
 			, `realtorId`
@@ -51,9 +53,62 @@
 		FROM
 			`real_estate`
 		WHERE
-			area <![CDATA[>]]> #{area} and
-        	price <![CDATA[<]]> #{price}
+			<![CDATA[
+			`type` = '매매' 
+			AND area > #{area}
+			AND	price < #{price}
+			]]>
         ORDER BY
         	`createdAt` DESC
 	</select>
+	
+	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.domain.RealEstate">
+		INSERT INTO `real_estate`
+		(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<insert id="insertRealEstateAsField" parameterType="map">
+		INSERT INTO `real_estate`
+		(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`		
+		)
+		VALUES
+		(
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 </mapper>
