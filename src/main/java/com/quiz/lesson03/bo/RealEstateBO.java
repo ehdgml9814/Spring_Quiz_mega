@@ -36,7 +36,13 @@ public class RealEstateBO {
 				address, area, type, price, rentPrice);
 	}
 	
+	// input: id, type, price
+	// output: int
 	public int updateRealEstateById(int id, String type, int price) {
 		return realEstateMapper.updateRealEstateById(id, type, price);
+	}
+	
+	public int deleteRealEstateById(int id) {
+		return realEstateMapper.deleteRealEstateById(id);
 	}
 }
