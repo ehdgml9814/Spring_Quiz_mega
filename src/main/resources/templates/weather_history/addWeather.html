@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -18,24 +21,24 @@
 			</nav>
 		</div> -->
 		<h2>날씨 추가</h2>
-		<form method="post" action="/weather-histroty/add-weather">
+		<form method="post" action="/weather-history/add-weather">
 			<div class="d-flex justify-content-between mt-5">
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 					<label for="date">날짜</label>
-					<input type="text" id="date" name="date" class="form-control col-2">
+					<input type="text" id="date" name="date" class="form-control col-9">
 				</div>	
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 					<div class="input-label">날씨</div>
-					<select class="form-control" name="weather">
+					<select class="form-control col-8" name="weather">
 						<option>맑음</option>
 						<option>구름조금</option>
 						<option>흐림</option>
 						<option>비</option>
 					</select>
 				</div>
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 					<div class="input-label">미세먼지</div>
-					<select class="form-control" name="microDust">
+					<select class="form-control col-8" name="microDust">
 						<option>좋음</option>
 						<option>보통</option>
 						<option>나쁨</option>
@@ -44,20 +47,29 @@
 				</div>
 			</div>
 			<div class="d-flex">
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 						<label for="temperatures">기온</label>
-						<input type="text" id="temperatures" name="temperatures" class="form-control col-2">
+						<input type="text" id="temperatures" name="temperatures" class="form-control col-8">
 				</div>	
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 						<label for="precipitation">강수량</label>
-						<input type="text" id="precipitation" name="precipitation" class="form-control col-2">
+						<input type="text" id="precipitation" name="precipitation" class="form-control col-8">
 				</div>	
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center col-4">
 						<label for="windSpeed">풍속</label>
-						<input type="text" id="windSpeed" name="windSpeed" class="form-control col-2">
+						<input type="text" id="windSpeed" name="windSpeed" class="form-control col-8">
 				</div>	
 			</div>
+			<input type="submit" class="btn btn-success">
 		</form>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			$("#date").datepicker({
+				dateFormat:"yy-mm-dd"
+			});
+		})
+	</script>
 </body>
 </html>

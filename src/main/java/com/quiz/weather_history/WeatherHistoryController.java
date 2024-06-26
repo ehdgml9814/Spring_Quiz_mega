@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.quiz.weather_history.bo.WeatherHistoryBO;
 import com.quiz.weather_history.domain.WeatherHistory;
 
-@RequestMapping("/weather-histroty")
+@RequestMapping("/weather-history")
 @Controller
 public class WeatherHistoryController {
 
@@ -40,7 +40,19 @@ public class WeatherHistoryController {
 	// 날씨 추가 기능 /weather-history/add-weather
 	@PostMapping("/add-weather")
 	public String addWeather(
-			@RequestParam("date") LocalDate date) {
-		;
+			// @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date
+			// 또는 객체로 받아올 때는 객체 클래스 위에 @어노테이션 추가
+			// LocalDate도 가능
+			@RequestParam("date") String date, 
+			@RequestParam("weather") String weather, 
+			@RequestParam("microDust") String microDust, 
+			@RequestParam("temperatures") double temperatures, 
+			@RequestParam("precipitation") double precipitation, 
+			@RequestParam("windSpeed") double windSpeed) {
+		// DB insert
+		weatherHistoryBO.addWeatherHistory(date, weather, microDust, temperatures, precipitation, windSpeed);
+		
+		// redirect => 날씨 목록
+		return "redirect:/weather-history/weather-list-view";
 	}
 }
