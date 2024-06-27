@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,16 +29,22 @@ public class Lesson06Controller {
 		return "lesson06/addBookmark";
 	}
 	
+	// AJAX가 하는 요청
+	// 즐겨찾기 추가 
 	@ResponseBody
 	@PostMapping("/add-bookmark")
-	public String addBookmark(
+	public Map<String, Object> addBookmark(
 			@RequestParam("name") String name, 
 			@RequestParam("url") String url) {
 		// DB insert
 		bookmarkBO.addBookmark(name, url);
 		
-		// 응답
-		return "성공";
+		// 성공 JSON
+		// {"code":200, "result":"성공"}
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		return result; // JSON String
 	}
 	
 	@GetMapping("/bookmark-list-view")
@@ -45,4 +53,6 @@ public class Lesson06Controller {
 		model.addAttribute("bookmarkList", bookmarkList);
 		return "lesson06/bookmarkList";
 	}
+	
+	// TODO 2번 문제 풀 때 삭제는 버튼 기능으로 사용, 클래스명 동일하게 해서 지정
 }

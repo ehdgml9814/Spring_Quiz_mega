@@ -20,10 +20,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="bookmark, status : ${bookmarkList}">
-					<td th:text="${status.count}"></td>
+				<tr th:each="bookmark : ${bookmarkList}">
+					<td th:text="${bookmark.id}"></td>
 					<td th:text="${bookmark.name}"></td>
-					<td th:text="${bookmark.url}"></td>
+					<td>
+						<a th:href="${bookmark.url}" th:text="${bookmark.url}"></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
