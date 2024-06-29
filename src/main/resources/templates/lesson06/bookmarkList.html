@@ -17,6 +17,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,9 +27,54 @@
 					<td>
 						<a th:href="${bookmark.url}" th:text="${bookmark.url}"></a>
 					</td>
+					<td>
+						<!-- 1) value로 값 넣기 -->
+						<!-- <button type="button" class="del-btn btn btn-danger" th:value="${bookmark.id}">삭제</button> -->
+						<!-- 2) data로 값 넣기 -->
+						<button type="button" class="del-btn btn btn-danger" th:data-bookmark-id="${bookmark.id}">삭제</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			// 삭제 버튼 클릭
+			$(".del-btn").on('click', function(e) {
+				// 1) value로 가져오기
+				//let id = $(this).val();
+				//let id = $(this).attr("value");
+				//let id = e.target.value;
+				
+				// 2) data로 가져오기
+				// 태그에 이름짓기: data-bookmark-id
+				// 스크립트에서 꺼내기: .data("bookmark-id")
+				let id = $(this).data("bookmark-id");
+				// alert(id);
+				
+				$.ajax({
+					// request
+					type:"delete"
+					, url:"/lesson06/delete-bookmark"
+					, data:{"id":id}
+					
+					// response
+					, success:function(data) {
+						// 성공일 때
+						if (data.code == 200) {
+							location.reload(); // 새로고침
+						} else if (data.code == 500) {
+							// 로직 상 실패
+							alert(data.error_message);
+						}
+					}
+					, error:function(error) {
+						alert("삭제하는데 실패했습니다.");
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
