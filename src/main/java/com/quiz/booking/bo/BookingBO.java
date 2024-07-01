@@ -17,4 +17,16 @@ public class BookingBO {
 	public List<Booking> getBookingList() {
 		return bookingMapper.selectBookingList();
 	}
+	
+	public int deleteBookingById(int id) {
+		return bookingMapper.deleteBookingById(id);
+	}
+	
+	public void addBooking(String name, String date, int day, int headcount, String phoneNumber) {
+		bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
+	}
+	
+	public Booking chechBookingByName(String name, String phoneNumber) {
+		return bookingMapper.chechBookingByName(name, phoneNumber);
+	}
 }
