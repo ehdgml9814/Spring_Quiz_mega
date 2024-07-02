@@ -84,7 +84,11 @@
 				
 					, success:function(data) {
 						if (data.code == 200) {
-							alert(data.booking);
+							alert("이름:" + data.result.name + "\n"
+									+ "날짜:" + data.result.date + "\n"
+									+ "일수:" + data.result.day + "\n"
+									+ "인원:" + data.result.headcount + "\n"
+									+ "상태:" + data.result.state);
 						} else if (data.code == 500) {
 							alert(data.error_message);
 						}

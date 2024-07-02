@@ -51,7 +51,7 @@
 		)
 	</insert>
 	
-	<select id="chechBookingByName" parameterType="map" resultType="com.quiz.booking.domain.Booking">
+	<select id="selectBookingByNamePhoneNumber" parameterType="map" resultType="com.quiz.booking.domain.Booking">
 		SELECT
 			`id`
 			, `name`
@@ -65,6 +65,7 @@
 		FROM
 			`booking`
 		WHERE
-			`name` = #{name} AND `phoneNumber` = #{phoneNumber} 
+			`name` = #{name} 
+			AND `phoneNumber` = #{phoneNumber} 
 	</select>
 </mapper>

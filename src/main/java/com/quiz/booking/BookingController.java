@@ -84,19 +84,17 @@ public class BookingController {
 	public Map<String, Object> checkBooking(
 			@RequestParam("name") String name, 
 			@RequestParam("phoneNumber") String phoneNumber) {
-		Booking booking = bookingBO.chechBookingByName(name, phoneNumber);
+		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
 		
 		Map<String, Object> result = new HashMap<>();
+		// {"code":200, "result":booking}
+		// {"code":200, "result":{"id":#, "name":#, ...}}
 		if (booking == null) {
 			result.put("code", 500);
 			result.put("error_message", "예약 내역이 없습니다.");
 		} else {
 			result.put("code", 200);
-			result.put("name", booking.getName());
-			result.put("date", booking.getDate());
-			result.put("day", booking.getDay());
-			result.put("headcount", booking.getHeadcount());
-			result.put("state", booking.getState());
+			result.put("result", booking);
 		}
 		return result;
 	}

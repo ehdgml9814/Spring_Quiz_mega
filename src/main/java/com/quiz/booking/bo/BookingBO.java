@@ -26,7 +26,9 @@ public class BookingBO {
 		bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
 	}
 	
-	public Booking chechBookingByName(String name, String phoneNumber) {
-		return bookingMapper.chechBookingByName(name, phoneNumber);
+	// output: Booking(최신 1개) or null
+	public Booking getLatestBookingByNamePhoneNumber(String name, String phoneNumber) {
+		List<Booking> bookingList = bookingMapper.selectBookingByNamePhoneNumber(name, phoneNumber);
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
 	}
 }
