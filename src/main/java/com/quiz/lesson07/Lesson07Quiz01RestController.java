@@ -16,7 +16,7 @@ public class Lesson07Quiz01RestController {
 	private CompanyBO companyBO;
 	
 	@GetMapping("/save1")
-	public CompanyEntity create1() {
+	public CompanyEntity save1() {
 //		회사명 : 넥손
 //		사업내용 : 컨텐츠 게임
 //		규모 : 대기업
@@ -30,7 +30,7 @@ public class Lesson07Quiz01RestController {
 	}
 	
 	@GetMapping("/save2")
-	public CompanyEntity create2() {
+	public CompanyEntity save2() {
 //		회사명 : 버블팡
 //		사업내용 : 여신 금융업
 //		규모 : 대기업
@@ -39,7 +39,18 @@ public class Lesson07Quiz01RestController {
 		String business = "여신 금융업";
 		String scale = "대기업";
 		int headcount = 6834;
-		
+		// 데이터 바로 넣어도 됨
 		return companyBO.addCompany(name, business, scale, headcount);
+	}
+	
+	@GetMapping("/update")
+	public CompanyEntity update() {
+		return companyBO.updateCompanyById(8, "중소기업", 34);
+	}
+	
+	@GetMapping("/delete")
+	public String delete() {
+		companyBO.deleteCompanyById(8);
+		return "수행 완료";
 	}
 }
